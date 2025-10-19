@@ -1,0 +1,10 @@
+{
+  "type": "void-expansion:void_crafting",
+  "ingredient": {
+    "item": "minecraft:gold_ingot"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:netherite_ingot"
+  }
+}

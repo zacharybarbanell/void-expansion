@@ -1,0 +1,16 @@
+{
+  "mixinPriority": 308606260,
+  "required": true,
+  "package": "com.zacharybarbanell.voidexpansion.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EntityMixin",
+    "EntityMixin$ItemEntityMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+	}
+}
