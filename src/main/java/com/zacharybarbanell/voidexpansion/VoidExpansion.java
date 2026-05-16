@@ -39,12 +39,6 @@ public class VoidExpansion implements ModInitializer {
                 }
             }
     );
-    public static final BlockEntityType<SkyCrystalBlockEntity> SKY_CRYSTAL_BE_TYPE = Registry.register(
-            BuiltInRegistries.BLOCK_ENTITY_TYPE,
-            resourceLocation("sky_crystal"),
-            BlockEntityType.Builder.of(SkyCrystalBlockEntity::new, VoidExpansionBlocks.SKY_CRYSTAL)
-                    .build()
-    );
     // This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
