@@ -119,8 +119,7 @@ public class EntityMixin {
             if (this.getItem().is(VoidExpansion.VOID_RESISTANT)) {
                 this.setIsLevitating(true);
             } else if (
-                    !this.level().isClientSide() &&
-                    (recipe = this.level().getServer().getRecipeManager().getRecipeFor(
+                    (recipe = this.level().getRecipeManager().getRecipeFor(
                         VoidExpansion.VOID_RECIPE, new SingleRecipeInput(this.getItem()), this.level()
                     )).isPresent()
             ) {
@@ -128,7 +127,7 @@ public class EntityMixin {
                 this.setItem(recipe.get().value().assemble(new SingleRecipeInput(this.getItem()), null));
                 this.getItem().setCount(count);
                 this.setIsLevitating(true);
-            } else if (this.position().y < this.level().getMinBuildHeight() - 64 - 1024) { //TODO replace this hack
+            } else {
                 original.call(instance);
             }
         }
