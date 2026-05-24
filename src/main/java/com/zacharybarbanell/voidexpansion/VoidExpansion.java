@@ -2,10 +2,13 @@ package com.zacharybarbanell.voidexpansion;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.datafix.fixes.References;
@@ -14,8 +17,14 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleItemRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static net.minecraft.world.level.biome.Biomes.THE_END;
 
 public class VoidExpansion implements ModInitializer {
 	public static final String MOD_ID = "void-expansion";
@@ -39,6 +48,18 @@ public class VoidExpansion implements ModInitializer {
                 }
             }
     );
+    public static final PlacementModifierType<BelowWorldPlacement> BELOW_WORLD_PLACEMENT = Registry.register(
+            BuiltInRegistries.PLACEMENT_MODIFIER_TYPE,
+            resourceLocation("below_world"),
+            () -> BelowWorldPlacement.CODEC
+    );
+    public static final Feature<OreConfiguration> TODO = Registry.register(
+            BuiltInRegistries.FEATURE,
+            resourceLocation("ore_exposed_below"),
+            OreFeatureExposedBelow.INSTANCE
+    );
+
+
     // This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
@@ -51,6 +72,11 @@ public class VoidExpansion implements ModInitializer {
 		// Proceed with mild caution.
         VoidExpansionBlocks.initialize();
 
+        BiomeModifications.addFeature(
+                BiomeSelectors.foundInTheEnd().and(context -> !context.getBiomeKey().equals(THE_END)),
+                GenerationStep.Decoration.UNDERGROUND_ORES,
+                ResourceKey.create(Registries.PLACED_FEATURE, resourceLocation("ore_sky_crystal"))
+        );
 
 		LOGGER.info("Hello Fabric world!");
 	}

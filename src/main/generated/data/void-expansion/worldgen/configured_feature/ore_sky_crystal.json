@@ -1,0 +1,20 @@
+{
+  "type": "void-expansion:ore_exposed_below",
+  "config": {
+    "discard_chance_on_air_exposure": 1.0,
+    "size": 16,
+    "targets": [
+      {
+        "state": {
+          "Name": "void-expansion:sky_crystal"
+        },
+        "target": {
+          "block_state": {
+            "Name": "minecraft:end_stone"
+          },
+          "predicate_type": "minecraft:blockstate_match"
+        }
+      }
+    ]
+  }
+}

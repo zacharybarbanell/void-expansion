@@ -17,8 +17,6 @@ public class VoidExpansionClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		ModelLoadingPlugin.register(new VoidExpansionModelLoadingPlugin());
-
 		BlockRenderLayerMap.INSTANCE.putBlock(VoidExpansionBlocks.SKY_CRYSTAL, RenderType.translucent());
 	}
 }
