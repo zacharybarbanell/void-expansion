@@ -100,13 +100,12 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
                         Registries.CONFIGURED_FEATURE,
                         VoidExpansion.resourceLocation("ore_sky_crystal")
                 );
-        public static final RuleTest endStoneReplaceableRule = new BlockStateMatchTest(Blocks.END_STONE.defaultBlockState());
-        public static final List<OreConfiguration.TargetBlockState> skyCrystalOreConfig =
-                List.of(
-                  OreConfiguration.target(endStoneReplaceableRule, VoidExpansionBlocks.SKY_CRYSTAL.defaultBlockState())
-                );
-
         public static void configure(BootstrapContext<ConfiguredFeature<?, ?>> bootstrapContext) {
+            RuleTest endStoneReplaceableRule = new BlockStateMatchTest(Blocks.END_STONE.defaultBlockState());
+            List<OreConfiguration.TargetBlockState> skyCrystalOreConfig =
+                    List.of(
+                            OreConfiguration.target(endStoneReplaceableRule, VoidExpansionBlocks.SKY_CRYSTAL.defaultBlockState())
+                    );
             bootstrapContext.register(SKY_CRYSTAL_VEIN_CONFIGURED_KEY, new ConfiguredFeature<>(
                     OreFeatureExposedBelow.INSTANCE,
                     new OreConfiguration(skyCrystalOreConfig, 24, 1.0F)
