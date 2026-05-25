@@ -2,7 +2,7 @@
   "type": "void-expansion:ore_exposed_below",
   "config": {
     "discard_chance_on_air_exposure": 1.0,
-    "size": 16,
+    "size": 24,
     "targets": [
       {
         "state": {

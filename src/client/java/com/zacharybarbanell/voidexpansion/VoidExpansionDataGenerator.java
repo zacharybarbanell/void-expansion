@@ -109,7 +109,7 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
         public static void configure(BootstrapContext<ConfiguredFeature<?, ?>> bootstrapContext) {
             bootstrapContext.register(SKY_CRYSTAL_VEIN_CONFIGURED_KEY, new ConfiguredFeature<>(
                     OreFeatureExposedBelow.INSTANCE,
-                    new OreConfiguration(skyCrystalOreConfig, 16, 1.0F)
+                    new OreConfiguration(skyCrystalOreConfig, 24, 1.0F)
             ));
         }
     }
@@ -128,7 +128,7 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
                     new PlacedFeature(
                             configuredFeatures.getOrThrow(VoidExpansionConfiguredFeatures.SKY_CRYSTAL_VEIN_CONFIGURED_KEY),
                             List.of(
-                                    RarityFilter.onAverageOnceEvery(1),
+                                    RarityFilter.onAverageOnceEvery(30),
                                     InSquarePlacement.spread(),
                                     BiomeFilter.biome(),
                                     BelowWorldPlacement.placement()
