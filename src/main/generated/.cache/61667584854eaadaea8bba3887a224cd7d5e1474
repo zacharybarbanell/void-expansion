@@ -1,3 +1,11 @@
-// 1.21.1	2026-05-24T19:05:12.2406074	Void Expansion/Recipes
-5c0851b5daa6b7c1f94782d910d99e3024e1c6e4 data\void-expansion\advancement\recipes\misc\netherite_ingot_from_gold_ingot_void_crafting.json
-a7cb2c3350e336a224cbcc79e7228192bfce762f data\void-expansion\recipe\netherite_ingot_from_gold_ingot_void_crafting.json
+// 1.21.1	2026-06-11T16:50:08.7733153	Void Expansion/Recipes
+561bc2c3583c1217162452cb357155352c5a59f3 data\void-expansion\recipe\void_block.json
+ab0b26d3e6ac7ab181323fed5ef30cec9ec5929e data\void-expansion\advancement\recipes\misc\void_ingot_from_void_block.json
+aa14eaacac1364016169d2721a196211900d218c data\void-expansion\recipe\void_nugget_from_encrusted_nugget_void_crafting.json
+926ac4526d56695015c4fb40fd1c5541abba6da3 data\void-expansion\advancement\recipes\misc\void_ingot_from_nuggets.json
+95279edb28d197e16aa49d2585c60eb4deb3e386 data\void-expansion\advancement\recipes\building_blocks\void_block.json
+22c67814b6a4a68ba4b503a61d5ca4a7ee5661bd data\void-expansion\advancement\recipes\misc\void_nugget.json
+c9922f627e30aa5588ca20e1caed1a58b8a1d7a0 data\void-expansion\advancement\recipes\misc\void_nugget_from_encrusted_nugget_void_crafting.json
+8105c7ac343b0c507b123cb578ec59da6d5e01fa data\void-expansion\recipe\void_ingot_from_nuggets.json
+2e5a1fef08043c2df819c5030f363ba2323de438 data\void-expansion\recipe\void_nugget.json
+153044e21f079ad05ea98c5c8dc11df8cdd3ca6b data\void-expansion\recipe\void_ingot_from_void_block.json

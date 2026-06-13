@@ -1,10 +1,10 @@
 {
   "type": "void-expansion:void_crafting",
   "ingredient": {
-    "item": "minecraft:gold_ingot"
+    "item": "void-expansion:encrusted_nugget"
   },
   "result": {
     "count": 1,
-    "id": "minecraft:netherite_ingot"
+    "id": "void-expansion:void_nugget"
   }
 }

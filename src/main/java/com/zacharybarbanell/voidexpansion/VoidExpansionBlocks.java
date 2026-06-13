@@ -27,6 +27,16 @@ public abstract class VoidExpansionBlocks {
                             .requiresCorrectToolForDrops()
             )
     );
+    public static final Block VOID_BLOCK = register(
+            "void_block",
+            new Block(
+                    BlockBehaviour.Properties.of()
+                            .mapColor(MapColor.COLOR_PURPLE)
+                            .requiresCorrectToolForDrops()
+                            .strength(4.0f, 2.0f)
+                            .sound(SoundType.METAL)
+            )
+    );
 
     public static void initialize() {}
 

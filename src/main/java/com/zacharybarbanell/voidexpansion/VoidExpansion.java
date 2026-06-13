@@ -71,6 +71,7 @@ public class VoidExpansion implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
         VoidExpansionBlocks.initialize();
+        VoidExpansionItems.initialize();
 
         BiomeModifications.addFeature(
                 BiomeSelectors.foundInTheEnd().and(context -> !context.getBiomeKey().equals(THE_END)),

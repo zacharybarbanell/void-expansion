@@ -14,6 +14,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
@@ -69,10 +70,16 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
         }
 
         @Override
-        public void buildRecipes(RecipeOutput exporter) {
-            new SingleItemRecipeBuilder(RecipeCategory.MISC, VoidRecipe::new, Ingredient.of(Items.GOLD_INGOT), Items.NETHERITE_INGOT, 1)
-                    .unlockedBy(RecipeProvider.getHasName(Items.GOLD_INGOT), RecipeProvider.has(Items.GOLD_INGOT))
-                    .save(exporter, RecipeProvider.getConversionRecipeName(Items.NETHERITE_INGOT, Items.GOLD_INGOT) + "_void_crafting");
+        public void buildRecipes(RecipeOutput recipeOutput) {
+            new SingleItemRecipeBuilder(RecipeCategory.MISC, VoidRecipe::new, Ingredient.of(VoidExpansionItems.ENCRUSTED_NUGGET), VoidExpansionItems.VOID_NUGGET, 1)
+                    .unlockedBy(RecipeProvider.getHasName(VoidExpansionItems.ENCRUSTED_NUGGET), RecipeProvider.has(VoidExpansionItems.ENCRUSTED_NUGGET))
+                    .save(recipeOutput, RecipeProvider.getConversionRecipeName(VoidExpansionItems.VOID_NUGGET, VoidExpansionItems.ENCRUSTED_NUGGET) + "_void_crafting");
+            VanillaRecipeProvider.nineBlockStorageRecipesRecipesWithCustomUnpacking(
+                    recipeOutput, RecipeCategory.MISC, VoidExpansionItems.VOID_INGOT, RecipeCategory.BUILDING_BLOCKS, VoidExpansionBlocks.VOID_BLOCK.asItem(), "void_ingot_from_void_block", "void_ingot"
+            );
+            VanillaRecipeProvider.nineBlockStorageRecipesWithCustomPacking(
+                    recipeOutput, RecipeCategory.MISC, VoidExpansionItems.VOID_NUGGET, RecipeCategory.MISC, VoidExpansionItems.VOID_INGOT, "void_ingot_from_nuggets", "void_ingot"
+            );
         }
     }
 

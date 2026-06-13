@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "void_ingot",
+  "key": {
+    "#": {
+      "item": "void-expansion:void_nugget"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "void-expansion:void_ingot"
+  }
+}
