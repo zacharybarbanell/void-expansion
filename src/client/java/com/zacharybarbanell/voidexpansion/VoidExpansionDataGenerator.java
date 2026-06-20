@@ -3,23 +3,26 @@ package com.zacharybarbanell.voidexpansion;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.*;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.recipes.*;
 import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
@@ -37,15 +40,31 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+        pack.addProvider(VoidExpansionBlockLootTableProvider::new);
         pack.addProvider(VoidExpansionItemTagProvider::new);
+        pack.addProvider(VoidExpansionBlockTagProvider::new);
         pack.addProvider(VoidExpansionRecipeProvider::new);
+        pack.addProvider(VoidExpansionModelProvider::new);
         pack.addProvider(VoidExpansionWorldgenProvider::new);
+        pack.addProvider(VoidExpansionLangProviders.VoidExpansionEnglishLangProvider::new);
 	}
 
     @Override
     public void buildRegistry(RegistrySetBuilder registrySetBuilder) {
-        registrySetBuilder.add(Registries.CONFIGURED_FEATURE, VoidExpansionConfiguredFeatures::configure);
-        registrySetBuilder.add(Registries.PLACED_FEATURE, VoidExpansionPlacedFeatures::configure);
+        registrySetBuilder.add(Registries.CONFIGURED_FEATURE, VoidExpansionFeatures.ConfiguredFeatures::configure);
+        registrySetBuilder.add(Registries.PLACED_FEATURE, VoidExpansionFeatures.PlacedFeatures::configure);
+    }
+
+    public static class VoidExpansionBlockLootTableProvider extends FabricBlockLootTableProvider {
+        public VoidExpansionBlockLootTableProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+            super(output, registriesFuture);
+        }
+
+        @Override
+        public void generate() {
+            dropSelf(VoidExpansionBlocks.VOID_BLOCK);
+            add(VoidExpansionBlocks.SKY_CRYSTAL, createOreDrop(VoidExpansionBlocks.SKY_CRYSTAL, VoidExpansionItems.SKY_SHARD));
+        }
     }
 
     public static class VoidExpansionItemTagProvider extends FabricTagProvider<Item> {
@@ -55,12 +74,24 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         protected void addTags(HolderLookup.Provider wrapperLookup) {
-            getOrCreateTagBuilder(VoidExpansion.FALLS_UP)
-                    .add(Items.IRON_INGOT)
-                    .setReplace(true);
-            getOrCreateTagBuilder(VoidExpansion.VOID_RESISTANT)
-                    .add(Items.COPPER_INGOT)
-                    .setReplace(true);
+            //Nothing here, for now
+        }
+    }
+
+    public static class VoidExpansionBlockTagProvider extends FabricTagProvider<Block> {
+        public VoidExpansionBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+            super(output, Registries.BLOCK, registriesFuture);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.Provider wrapperLookup) {
+            getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
+                    .add(VoidExpansionBlocks.SKY_CRYSTAL)
+                    .add(VoidExpansionBlocks.VOID_BLOCK)
+                    .setReplace(false);
+            getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
+                    .add(VoidExpansionBlocks.VOID_BLOCK)
+                    .setReplace(false);
         }
     }
 
@@ -80,6 +111,34 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
             VanillaRecipeProvider.nineBlockStorageRecipesWithCustomPacking(
                     recipeOutput, RecipeCategory.MISC, VoidExpansionItems.VOID_NUGGET, RecipeCategory.MISC, VoidExpansionItems.VOID_INGOT, "void_ingot_from_nuggets", "void_ingot"
             );
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VoidExpansionItems.ENCRUSTED_NUGGET)
+                    .define('#', VoidExpansionItems.SKY_SHARD)
+                    .define('X', Items.IRON_NUGGET)
+                    .pattern("###")
+                    .pattern("#X#")
+                    .pattern("###")
+                    .unlockedBy("has_diamond", has(Items.DIAMOND))
+                    .save(recipeOutput);
+        }
+    }
+
+    public static class VoidExpansionModelProvider extends FabricModelProvider {
+        public VoidExpansionModelProvider(FabricDataOutput output) {
+            super(output);
+        }
+
+        @Override
+        public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
+            blockStateModelGenerator.createTrivialCube(VoidExpansionBlocks.SKY_CRYSTAL);
+            blockStateModelGenerator.createTrivialCube(VoidExpansionBlocks.VOID_BLOCK);
+        }
+
+        @Override
+        public void generateItemModels(ItemModelGenerators itemModelGenerator) {
+            itemModelGenerator.generateFlatItem(VoidExpansionItems.SKY_SHARD, ModelTemplates.FLAT_ITEM);
+            itemModelGenerator.generateFlatItem(VoidExpansionItems.ENCRUSTED_NUGGET, ModelTemplates.FLAT_ITEM);
+            itemModelGenerator.generateFlatItem(VoidExpansionItems.VOID_NUGGET, ModelTemplates.FLAT_ITEM);
+            itemModelGenerator.generateFlatItem(VoidExpansionItems.VOID_INGOT, ModelTemplates.FLAT_ITEM);
         }
     }
 
@@ -98,49 +157,6 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
         @Override
         public String getName() {
             return "Worldgen";
-        }
-    }
-
-    public static class VoidExpansionConfiguredFeatures {
-        public static final ResourceKey<ConfiguredFeature<?, ?>> SKY_CRYSTAL_VEIN_CONFIGURED_KEY =
-                ResourceKey.create(
-                        Registries.CONFIGURED_FEATURE,
-                        VoidExpansion.resourceLocation("ore_sky_crystal")
-                );
-        public static void configure(BootstrapContext<ConfiguredFeature<?, ?>> bootstrapContext) {
-            RuleTest endStoneReplaceableRule = new BlockStateMatchTest(Blocks.END_STONE.defaultBlockState());
-            List<OreConfiguration.TargetBlockState> skyCrystalOreConfig =
-                    List.of(
-                            OreConfiguration.target(endStoneReplaceableRule, VoidExpansionBlocks.SKY_CRYSTAL.defaultBlockState())
-                    );
-            bootstrapContext.register(SKY_CRYSTAL_VEIN_CONFIGURED_KEY, new ConfiguredFeature<>(
-                    OreFeatureExposedBelow.INSTANCE,
-                    new OreConfiguration(skyCrystalOreConfig, 24, 1.0F)
-            ));
-        }
-    }
-
-    public static class VoidExpansionPlacedFeatures {
-        public static final ResourceKey<PlacedFeature> SKY_CRYSTAL_VEIN_PLACED_KEY =
-                ResourceKey.create(
-                        Registries.PLACED_FEATURE,
-                        VoidExpansion.resourceLocation("ore_sky_crystal")
-                );
-
-        public static void configure(BootstrapContext<PlacedFeature> bootstrapContext) {
-            HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = bootstrapContext.lookup(Registries.CONFIGURED_FEATURE);
-            bootstrapContext.register(
-                    SKY_CRYSTAL_VEIN_PLACED_KEY,
-                    new PlacedFeature(
-                            configuredFeatures.getOrThrow(VoidExpansionConfiguredFeatures.SKY_CRYSTAL_VEIN_CONFIGURED_KEY),
-                            List.of(
-                                    RarityFilter.onAverageOnceEvery(30),
-                                    InSquarePlacement.spread(),
-                                    BiomeFilter.biome(),
-                                    BelowWorldPlacement.placement()
-                            )
-                    )
-            );
         }
     }
 }

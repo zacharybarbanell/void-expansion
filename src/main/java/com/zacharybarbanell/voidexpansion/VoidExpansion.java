@@ -6,11 +6,14 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Unit;
 import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -32,8 +35,16 @@ public class VoidExpansion implements ModInitializer {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, string);
     }
 
-    public static final TagKey<Item> FALLS_UP = TagKey.create(Registries.ITEM, resourceLocation("falls_up"));
-    public static final TagKey<Item> VOID_RESISTANT = TagKey.create(Registries.ITEM, resourceLocation("void_resistance"));
+    public static DataComponentType<Unit> FALLS_UP = Registry.register(
+            BuiltInRegistries.DATA_COMPONENT_TYPE,
+            VoidExpansion.resourceLocation("falls_up"),
+            DataComponentType.<Unit>builder().persistent(Unit.CODEC).networkSynchronized(StreamCodec.unit(Unit.INSTANCE)).build()
+    );
+    public static DataComponentType<Unit> VOID_IMMUNE = Registry.register(
+            BuiltInRegistries.DATA_COMPONENT_TYPE,
+            VoidExpansion.resourceLocation("void_immune"),
+            DataComponentType.<Unit>builder().persistent(Unit.CODEC).networkSynchronized(StreamCodec.unit(Unit.INSTANCE)).build()
+    );
 	public static final RecipeSerializer<VoidRecipe> VOID_RECIPE_SERIALIZER = Registry.register(
             BuiltInRegistries.RECIPE_SERIALIZER,
             resourceLocation("void_crafting"),
@@ -76,7 +87,7 @@ public class VoidExpansion implements ModInitializer {
         BiomeModifications.addFeature(
                 BiomeSelectors.foundInTheEnd().and(context -> !context.getBiomeKey().equals(THE_END)),
                 GenerationStep.Decoration.UNDERGROUND_ORES,
-                ResourceKey.create(Registries.PLACED_FEATURE, resourceLocation("ore_sky_crystal"))
+                VoidExpansionFeatures.PlacedFeatures.SKY_CRYSTAL_VEIN_PLACED_KEY
         );
 
 		LOGGER.info("Hello Fabric world!");

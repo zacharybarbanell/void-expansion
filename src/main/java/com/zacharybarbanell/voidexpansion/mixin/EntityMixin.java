@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.zacharybarbanell.voidexpansion.VoidExpansion;
+import com.zacharybarbanell.voidexpansion.VoidExpansionItems;
 import com.zacharybarbanell.voidexpansion.VoidRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -116,7 +117,7 @@ public class EntityMixin {
 
             Optional<RecipeHolder<VoidRecipe>> recipe;
 
-            if (this.getItem().is(VoidExpansion.VOID_RESISTANT)) {
+            if (this.getItem().has(VoidExpansion.VOID_IMMUNE)) {
                 this.setIsLevitating(true);
             } else if (
                     (recipe = this.level().getRecipeManager().getRecipeFor(
@@ -160,7 +161,7 @@ public class EntityMixin {
 
         @ModifyReturnValue(method = "getDefaultGravity", at = @At("RETURN"))
         protected double maybeFlipGravity(double d) {
-            if (this.getItem().is(VoidExpansion.FALLS_UP)) {
+            if (this.getItem().has(VoidExpansion.FALLS_UP)) {
                 return -d;
             }
             else {

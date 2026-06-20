@@ -1,13 +1,16 @@
 package com.zacharybarbanell.voidexpansion;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Unit;
 import net.minecraft.world.item.Item;
 
 public class VoidExpansionItems {
     public static final Item SKY_SHARD = register(
-            new Item(new Item.Properties()),
+            new Item(new Item.Properties().component(VoidExpansion.FALLS_UP, Unit.INSTANCE)),
             "sky_shard"
     );
     public static final Item ENCRUSTED_NUGGET = register(
@@ -15,11 +18,11 @@ public class VoidExpansionItems {
             "encrusted_nugget"
     );
     public static final Item VOID_NUGGET = register(
-            new Item(new Item.Properties()),
+            new Item(new Item.Properties().component(VoidExpansion.VOID_IMMUNE, Unit.INSTANCE)),
             "void_nugget"
     );
     public static final Item VOID_INGOT = register(
-            new Item(new Item.Properties()),
+            new Item(new Item.Properties().component(VoidExpansion.VOID_IMMUNE, Unit.INSTANCE)),
             "void_ingot"
     );
 

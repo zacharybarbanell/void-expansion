@@ -14,4 +14,9 @@ public class VoidRecipe extends SingleItemRecipe {
     public boolean matches(SingleRecipeInput recipeInput, Level level) {
         return this.ingredient.test(recipeInput.item());
     }
+
+    @Override
+    public boolean isSpecial() {
+        return true; //Disables recipe book functionality
+    }
 }
