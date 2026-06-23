@@ -52,27 +52,27 @@ public class VoidExpansionItems {
             "void_upgrade_smithing_template"
     );
 
-    public static final Item VOID_HELMET = registerVoidArmorItem(ArmorItem.Type.HELMET, "void_helmet");
-    public static final Item VOID_CHESTPLATE = registerVoidArmorItem(ArmorItem.Type.CHESTPLATE, "void_chestplate");
-    public static final Item VOID_LEGGINGS = registerVoidArmorItem(ArmorItem.Type.LEGGINGS, "void_leggings");
-    public static final Item VOID_BOOTS = registerVoidArmorItem(ArmorItem.Type.BOOTS, "void_boots");
+    public static final ArmorItem VOID_HELMET = registerVoidArmorItem(ArmorItem.Type.HELMET, "void_helmet");
+    public static final ArmorItem VOID_CHESTPLATE = registerVoidArmorItem(ArmorItem.Type.CHESTPLATE, "void_chestplate");
+    public static final ArmorItem VOID_LEGGINGS = registerVoidArmorItem(ArmorItem.Type.LEGGINGS, "void_leggings");
+    public static final ArmorItem VOID_BOOTS = registerVoidArmorItem(ArmorItem.Type.BOOTS, "void_boots");
 
     public static void initialize() {
     }
 
 
-    public static Item register(Item item, String id) {
+    public static <T extends Item> T register(T item, String id) {
         // Create the identifier for the item.
         ResourceLocation itemID = VoidExpansion.resourceLocation(id);
 
         // Register the item.
-        Item registeredItem = Registry.register(BuiltInRegistries.ITEM, itemID, item);
+        T registeredItem = Registry.register(BuiltInRegistries.ITEM, itemID, item);
 
         // Return the registered item!
         return registeredItem;
     }
 
-    public static Item registerVoidArmorItem(ArmorItem.Type armorType, String id) {
+    public static ArmorItem registerVoidArmorItem(ArmorItem.Type armorType, String id) {
         return register(
                 new ExtendedArmorItem(VoidExpansion.VOID_ARMOR_MATERIAL, armorType, new Item.Properties()
                         .component(VoidExpansion.VOID_IMMUNE, Unit.INSTANCE)

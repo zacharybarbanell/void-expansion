@@ -1,1 +1,5 @@
-// 1.21.1	2026-06-22T19:19:07.0883935	Void Expansion/Tags for minecraft:item
+// 1.21.1	2026-06-22T21:23:30.9872859	Void Expansion/Tags for minecraft:item
+2b9e7ff05a33b0d7605a7ad354762ec2572ad711 data\minecraft\tags\item\chest_armor.json
+e5b543e9730d25df8b0f502ed6b5c3fe511f1292 data\minecraft\tags\item\foot_armor.json
+6c318d65773c3d6a7236f62321af3f1fb8451332 data\minecraft\tags\item\leg_armor.json
+87d9626c046a184513babbf9a551e1625cc31634 data\minecraft\tags\item\head_armor.json

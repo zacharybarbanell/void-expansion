@@ -65,7 +65,18 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         protected void addTags(HolderLookup.Provider wrapperLookup) {
-            //Nothing here, for now
+            getOrCreateTagBuilder(ItemTags.HEAD_ARMOR)
+                    .add(VoidExpansionItems.VOID_HELMET)
+                    .setReplace(false);
+            getOrCreateTagBuilder(ItemTags.CHEST_ARMOR)
+                    .add(VoidExpansionItems.VOID_CHESTPLATE)
+                    .setReplace(false);
+            getOrCreateTagBuilder(ItemTags.LEG_ARMOR)
+                    .add(VoidExpansionItems.VOID_LEGGINGS)
+                    .setReplace(false);
+            getOrCreateTagBuilder(ItemTags.FOOT_ARMOR)
+                    .add(VoidExpansionItems.VOID_BOOTS)
+                    .setReplace(false);
         }
     }
 
@@ -156,7 +167,10 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
 
             itemModelGenerator.generateFlatItem(VoidExpansionItems.VOID_UPGRADE_SMITHING_TEMPLATE, ModelTemplates.FLAT_ITEM);
 
-
+            itemModelGenerator.generateArmorTrims(VoidExpansionItems.VOID_HELMET);
+            itemModelGenerator.generateArmorTrims(VoidExpansionItems.VOID_CHESTPLATE);
+            itemModelGenerator.generateArmorTrims(VoidExpansionItems.VOID_LEGGINGS);
+            itemModelGenerator.generateArmorTrims(VoidExpansionItems.VOID_BOOTS);
         }
     }
 
