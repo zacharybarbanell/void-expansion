@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.5,
+  "group": "sky_shard",
+  "ingredient": {
+    "item": "void-expansion:sky_crystal"
+  },
+  "result": {
+    "id": "void-expansion:sky_shard"
+  }
+}

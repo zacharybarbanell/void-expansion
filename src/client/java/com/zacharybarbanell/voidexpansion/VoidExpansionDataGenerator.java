@@ -108,6 +108,25 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
                     .unlockedBy(RecipeProvider.getHasName(VoidExpansionItems.ENCRUSTED_NUGGET), RecipeProvider.has(VoidExpansionItems.ENCRUSTED_NUGGET))
                     .save(recipeOutput, RecipeProvider.getConversionRecipeName(VoidExpansionItems.VOID_NUGGET, VoidExpansionItems.ENCRUSTED_NUGGET) + "_void_crafting");
 
+            VanillaRecipeProvider.oreSmelting(
+                    recipeOutput,
+                    List.of(VoidExpansionBlocks.SKY_CRYSTAL),
+                    RecipeCategory.MISC,
+                    VoidExpansionItems.SKY_SHARD,
+                    1.5F,
+                    200,
+                    "sky_shard"
+            );
+            VanillaRecipeProvider.oreBlasting(
+                    recipeOutput,
+                    List.of(VoidExpansionBlocks.SKY_CRYSTAL),
+                    RecipeCategory.MISC,
+                    VoidExpansionItems.SKY_SHARD,
+                    1.5F,
+                    100,
+                    "sky_shard"
+            );
+
             VanillaRecipeProvider.nineBlockStorageRecipesRecipesWithCustomUnpacking(
                     recipeOutput, RecipeCategory.MISC, VoidExpansionItems.VOID_INGOT, RecipeCategory.BUILDING_BLOCKS, VoidExpansionBlocks.VOID_BLOCK.asItem(), "void_ingot_from_void_block", "void_ingot"
             );

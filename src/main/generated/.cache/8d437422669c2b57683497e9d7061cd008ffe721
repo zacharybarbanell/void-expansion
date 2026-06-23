@@ -1,4 +1,4 @@
-// 1.21.1	2026-06-22T21:23:30.9884692	Void Expansion/Model Definitions
+// 1.21.1	2026-06-22T23:26:01.4776719	Void Expansion/Model Definitions
 65fddbb64837551b82426d7421c1492808619790 assets\void-expansion\models\item\void_chestplate_iron_trim.json
 1579be8cc1e6a4e95b0d39631faf588ecd648a68 assets\void-expansion\models\item\void_helmet_gold_trim.json
 0c92a59dccbbf85fd98bb98f5c8b23c164b23b35 assets\void-expansion\models\item\sky_crystal.json
@@ -35,8 +35,8 @@ f805af15dd269e83ae3bf8e0243af160bff78430 assets\void-expansion\models\item\sky_s
 cc3e2b745931d45869b53bf46957c5feb6f80d62 assets\void-expansion\models\item\void_helmet_netherite_trim.json
 48eff786cb2a75bcdefb911f66eba291edbd32ab assets\void-expansion\models\item\void_helmet_copper_trim.json
 ff59074bff239d48b5ad55bb82a6ff044eb05f01 assets\void-expansion\models\item\void_chestplate_gold_trim.json
-41034c51873b5596859eb58d08772fc5d3632b48 assets\void-expansion\models\item\void_leggings_gold_trim.json
 2b9abe77e38b0e592e72e17c68c50988ed8db9bd assets\void-expansion\models\item\void_chestplate_amethyst_trim.json
+41034c51873b5596859eb58d08772fc5d3632b48 assets\void-expansion\models\item\void_leggings_gold_trim.json
 bc3065f08e22faffec8e1c282ff8a972fb88d79c assets\void-expansion\models\item\void_helmet_iron_trim.json
 931acb446e33f4cd458101b52beb2934fc2a31a1 assets\void-expansion\models\block\sky_crystal.json
 1d45215703fae72e29b09539c7b2db33c4f402f0 assets\void-expansion\models\item\void_boots_redstone_trim.json
