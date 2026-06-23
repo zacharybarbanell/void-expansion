@@ -3,7 +3,6 @@ package com.zacharybarbanell.voidexpansion;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -22,6 +21,14 @@ public class VoidExpansionLangProviders {
             translationBuilder.add(VoidExpansionItems.SKY_SHARD.getDescriptionId(), "Void Shard");
             translationBuilder.add(VoidExpansionItems.VOID_INGOT.getDescriptionId(), "Voidmetal Ingot");
             translationBuilder.add(VoidExpansionItems.VOID_NUGGET.getDescriptionId(), "Voidmetal Nugget");
+
+            translationBuilder.add(VoidExpansionItems.VOID_UPGRADE_SMITHING_TEMPLATE.getDescriptionId(), "Smithing Template");
+
+            translationBuilder.add(VoidExpansionTextComponents.VOID_UPGRADE.getString(), "Voidmetal Upgrade");
+            translationBuilder.add(VoidExpansionTextComponents.VOID_UPGRADE_APPLIES_TO.getString(), "Diamond Equipment");
+            translationBuilder.add(VoidExpansionTextComponents.VOID_UPGRADE_INGREDIENTS.getString(), "Voidmetal Ingot");
+            translationBuilder.add(VoidExpansionTextComponents.VOID_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add diamond armor");
+            translationBuilder.add(VoidExpansionTextComponents.VOID_UPGRADE_ADDITIONS_SLOT_DESCRIPTION.getString(), "Add Voidmetal Ingot");
         }
     }
 }

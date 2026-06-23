@@ -12,6 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.model.ModelTemplate;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.recipes.*;
 import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
@@ -22,6 +23,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -40,7 +42,8 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
-        pack.addProvider(VoidExpansionBlockLootTableProvider::new);
+        pack.addProvider(VoidExpansionLootTables.VoidExpansionBlockLootTableProvider::new);
+        pack.addProvider(VoidExpansionLootTables.VoidExpansionChestLootTableProvider::new);
         pack.addProvider(VoidExpansionItemTagProvider::new);
         pack.addProvider(VoidExpansionBlockTagProvider::new);
         pack.addProvider(VoidExpansionRecipeProvider::new);
@@ -53,18 +56,6 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
     public void buildRegistry(RegistrySetBuilder registrySetBuilder) {
         registrySetBuilder.add(Registries.CONFIGURED_FEATURE, VoidExpansionFeatures.ConfiguredFeatures::configure);
         registrySetBuilder.add(Registries.PLACED_FEATURE, VoidExpansionFeatures.PlacedFeatures::configure);
-    }
-
-    public static class VoidExpansionBlockLootTableProvider extends FabricBlockLootTableProvider {
-        public VoidExpansionBlockLootTableProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
-            super(output, registriesFuture);
-        }
-
-        @Override
-        public void generate() {
-            dropSelf(VoidExpansionBlocks.VOID_BLOCK);
-            add(VoidExpansionBlocks.SKY_CRYSTAL, createOreDrop(VoidExpansionBlocks.SKY_CRYSTAL, VoidExpansionItems.SKY_SHARD));
-        }
     }
 
     public static class VoidExpansionItemTagProvider extends FabricTagProvider<Item> {
@@ -105,20 +96,43 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
             new SingleItemRecipeBuilder(RecipeCategory.MISC, VoidRecipe::new, Ingredient.of(VoidExpansionItems.ENCRUSTED_NUGGET), VoidExpansionItems.VOID_NUGGET, 1)
                     .unlockedBy(RecipeProvider.getHasName(VoidExpansionItems.ENCRUSTED_NUGGET), RecipeProvider.has(VoidExpansionItems.ENCRUSTED_NUGGET))
                     .save(recipeOutput, RecipeProvider.getConversionRecipeName(VoidExpansionItems.VOID_NUGGET, VoidExpansionItems.ENCRUSTED_NUGGET) + "_void_crafting");
+
             VanillaRecipeProvider.nineBlockStorageRecipesRecipesWithCustomUnpacking(
                     recipeOutput, RecipeCategory.MISC, VoidExpansionItems.VOID_INGOT, RecipeCategory.BUILDING_BLOCKS, VoidExpansionBlocks.VOID_BLOCK.asItem(), "void_ingot_from_void_block", "void_ingot"
             );
+
             VanillaRecipeProvider.nineBlockStorageRecipesWithCustomPacking(
                     recipeOutput, RecipeCategory.MISC, VoidExpansionItems.VOID_NUGGET, RecipeCategory.MISC, VoidExpansionItems.VOID_INGOT, "void_ingot_from_nuggets", "void_ingot"
             );
+
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VoidExpansionItems.ENCRUSTED_NUGGET)
                     .define('#', VoidExpansionItems.SKY_SHARD)
                     .define('X', Items.IRON_NUGGET)
                     .pattern("###")
                     .pattern("#X#")
                     .pattern("###")
-                    .unlockedBy("has_diamond", has(Items.DIAMOND))
+                    .unlockedBy("has_sky_shard", has(VoidExpansionItems.SKY_SHARD))
                     .save(recipeOutput);
+
+            //TODO replace with real copy material
+            VanillaRecipeProvider.copySmithingTemplate(recipeOutput, VoidExpansionItems.VOID_UPGRADE_SMITHING_TEMPLATE, Items.BARRIER);
+
+            voidSmithingRecipe(recipeOutput, RecipeCategory.COMBAT, Ingredient.of(Items.DIAMOND_HELMET), VoidExpansionItems.VOID_HELMET);
+            voidSmithingRecipe(recipeOutput, RecipeCategory.COMBAT, Ingredient.of(Items.DIAMOND_CHESTPLATE), VoidExpansionItems.VOID_CHESTPLATE);
+            voidSmithingRecipe(recipeOutput, RecipeCategory.COMBAT, Ingredient.of(Items.DIAMOND_LEGGINGS), VoidExpansionItems.VOID_LEGGINGS);
+            voidSmithingRecipe(recipeOutput, RecipeCategory.COMBAT, Ingredient.of(Items.DIAMOND_BOOTS), VoidExpansionItems.VOID_BOOTS);
+        }
+
+        private static void voidSmithingRecipe(RecipeOutput recipeOutput, RecipeCategory category, Ingredient input, Item output) {
+            SmithingTransformRecipeBuilder.smithing(
+                            Ingredient.of(VoidExpansionItems.VOID_UPGRADE_SMITHING_TEMPLATE),
+                            input,
+                            Ingredient.of(VoidExpansionItems.VOID_INGOT),
+                            category,
+                            output
+                    )
+                    .unlocks("has_void_ingot", RecipeProvider.has(VoidExpansionItems.VOID_INGOT))
+                    .save(recipeOutput, RecipeProvider.getItemName(output) + "_smithing");
         }
     }
 
@@ -139,6 +153,10 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
             itemModelGenerator.generateFlatItem(VoidExpansionItems.ENCRUSTED_NUGGET, ModelTemplates.FLAT_ITEM);
             itemModelGenerator.generateFlatItem(VoidExpansionItems.VOID_NUGGET, ModelTemplates.FLAT_ITEM);
             itemModelGenerator.generateFlatItem(VoidExpansionItems.VOID_INGOT, ModelTemplates.FLAT_ITEM);
+
+            itemModelGenerator.generateFlatItem(VoidExpansionItems.VOID_UPGRADE_SMITHING_TEMPLATE, ModelTemplates.FLAT_ITEM);
+
+
         }
     }
 

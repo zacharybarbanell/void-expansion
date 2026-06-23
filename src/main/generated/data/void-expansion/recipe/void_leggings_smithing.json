@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "void-expansion:void_ingot"
+  },
+  "base": {
+    "item": "minecraft:diamond_leggings"
+  },
+  "result": {
+    "count": 1,
+    "id": "void-expansion:void_leggings"
+  },
+  "template": {
+    "item": "void-expansion:void_upgrade_smithing_template"
+  }
+}

@@ -1,10 +1,11 @@
-// 1.21.1	2026-06-20T14:24:07.7586097	Void Expansion/Model Definitions
+// 1.21.1	2026-06-22T19:19:07.0883935	Void Expansion/Model Definitions
 2dbc78aab49bb0b736e3dd04f43d2918316f11d0 assets\void-expansion\models\item\void_ingot.json
 f00e867a5d800cb65d6584c7229cfaf3d622358e assets\void-expansion\models\item\void_nugget.json
 0c92a59dccbbf85fd98bb98f5c8b23c164b23b35 assets\void-expansion\models\item\sky_crystal.json
 fa9ba6a95307db2f7870b0ea8637fafeca4cd070 assets\void-expansion\blockstates\sky_crystal.json
 931acb446e33f4cd458101b52beb2934fc2a31a1 assets\void-expansion\models\block\sky_crystal.json
 f805af15dd269e83ae3bf8e0243af160bff78430 assets\void-expansion\models\item\sky_shard.json
+d2d982d82df46db1b29a8fecc1ec6540a60926a5 assets\void-expansion\models\item\void_upgrade_smithing_template.json
 5b910d6bf00d8269479a493c21be81882a881988 assets\void-expansion\models\item\void_block.json
 579defc7a404cc8941e2d79068d50155523deba2 assets\void-expansion\blockstates\void_block.json
 0d6d1c0e8154d11e5922e19edf035503930baa81 assets\void-expansion\models\item\encrusted_nugget.json

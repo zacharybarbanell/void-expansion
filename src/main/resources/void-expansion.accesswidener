@@ -1,3 +1,14 @@
 accessWidener v2 named
 
 accessible method net/minecraft/world/item/crafting/SingleItemRecipe$Serializer <init> (Lnet/minecraft/world/item/crafting/SingleItemRecipe$Factory;)V
+
+accessible field net/minecraft/world/item/ArmorItem defaultModifiers Ljava/util/function/Supplier;
+
+accessible field net/minecraft/world/item/SmithingTemplateItem TITLE_FORMAT Lnet/minecraft/ChatFormatting;
+accessible field net/minecraft/world/item/SmithingTemplateItem DESCRIPTION_FORMAT Lnet/minecraft/ChatFormatting;
+
+accessible field net/minecraft/world/item/SmithingTemplateItem EMPTY_SLOT_HELMET Lnet/minecraft/resources/ResourceLocation;
+accessible field net/minecraft/world/item/SmithingTemplateItem EMPTY_SLOT_CHESTPLATE Lnet/minecraft/resources/ResourceLocation;
+accessible field net/minecraft/world/item/SmithingTemplateItem EMPTY_SLOT_LEGGINGS Lnet/minecraft/resources/ResourceLocation;
+accessible field net/minecraft/world/item/SmithingTemplateItem EMPTY_SLOT_BOOTS Lnet/minecraft/resources/ResourceLocation;
+accessible field net/minecraft/world/item/SmithingTemplateItem EMPTY_SLOT_INGOT Lnet/minecraft/resources/ResourceLocation;

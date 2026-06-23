@@ -3,6 +3,12 @@
   "block.void-expansion.void_block": "Voidmetal Block",
   "item.void-expansion.encrusted_nugget": "Encrusted Nugget",
   "item.void-expansion.sky_shard": "Void Shard",
+  "item.void-expansion.smithing_template.void_upgrade.additions_slot_description": "Add Voidmetal Ingot",
+  "item.void-expansion.smithing_template.void_upgrade.applies_to": "Diamond Equipment",
+  "item.void-expansion.smithing_template.void_upgrade.base_slot_description": "Add diamond armor",
+  "item.void-expansion.smithing_template.void_upgrade.ingredients": "Voidmetal Ingot",
   "item.void-expansion.void_ingot": "Voidmetal Ingot",
-  "item.void-expansion.void_nugget": "Voidmetal Nugget"
+  "item.void-expansion.void_nugget": "Voidmetal Nugget",
+  "item.void-expansion.void_upgrade_smithing_template": "Smithing Template",
+  "upgrade.void-expansion.void_upgrade": "Voidmetal Upgrade"
 }

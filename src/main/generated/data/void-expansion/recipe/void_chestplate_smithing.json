@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "void-expansion:void_ingot"
+  },
+  "base": {
+    "item": "minecraft:diamond_chestplate"
+  },
+  "result": {
+    "count": 1,
+    "id": "void-expansion:void_chestplate"
+  },
+  "template": {
+    "item": "void-expansion:void_upgrade_smithing_template"
+  }
+}

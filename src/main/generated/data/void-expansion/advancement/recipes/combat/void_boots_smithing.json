@@ -1,32 +1,32 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sky_shard": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "void-expansion:void_boots_smithing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_void_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "void-expansion:sky_shard"
+            "items": "void-expansion:void_ingot"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "void-expansion:encrusted_nugget"
-      },
-      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_sky_shard"
+      "has_void_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "void-expansion:encrusted_nugget"
+      "void-expansion:void_boots_smithing"
     ]
   }
 }
