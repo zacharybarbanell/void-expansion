@@ -32,14 +32,11 @@
 			"environment": "client"
 		}
 	],
-    "accessWidener": "void-expansion.accesswidener",
+    "accessWidener": "void-expansion.classtweaker",
 	"depends": {
-		"fabricloader": ">=0.17.3",
+		"fabricloader": ">=0.19.3",
 		"minecraft": "~1.21.1",
 		"java": ">=21",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }

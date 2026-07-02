@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -12,8 +13,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.model.ModelTemplate;
-import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.models.model.*;
 import net.minecraft.data.recipes.*;
 import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -175,6 +175,11 @@ public class VoidExpansionDataGenerator implements DataGeneratorEntrypoint {
         public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
             blockStateModelGenerator.createTrivialCube(VoidExpansionBlocks.SKY_CRYSTAL);
             blockStateModelGenerator.createTrivialCube(VoidExpansionBlocks.VOID_BLOCK);
+            blockStateModelGenerator.createTrivialBlock(VoidExpansionBlocks.ANTIGRAVITY_PROJECTOR, TexturedModel.CUBE_TOP_BOTTOM);
+            blockStateModelGenerator.createTrivialBlock(VoidExpansionBlocks.ANTIGRAVITY_BEAM, TexturedModel.createDefault(
+                    block -> new TextureMapping().put(TextureSlot.PARTICLE, MissingTextureAtlasSprite.getLocation()),
+                    ModelTemplates.PARTICLE_ONLY
+            ));
         }
 
         @Override

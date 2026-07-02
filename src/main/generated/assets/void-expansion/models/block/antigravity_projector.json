@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "void-expansion:block/antigravity_projector_bottom",
+    "side": "void-expansion:block/antigravity_projector_side",
+    "top": "void-expansion:block/antigravity_projector_top"
+  }
+}

@@ -5,10 +5,12 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.StreamCodec;
@@ -113,6 +115,11 @@ public class VoidExpansion implements ModInitializer {
                     2.0F, //Toughness
                     0.0F //Knockback Resistance
             )
+    );
+    public static final SimpleParticleType ANTIGRAVITY_PARTICLE = Registry.register(
+            BuiltInRegistries.PARTICLE_TYPE,
+            resourceLocation("antigravity_particle"),
+            FabricParticleTypes.simple()
     );
 
 

@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 
 import java.util.function.UnaryOperator;
 
@@ -44,6 +45,25 @@ public abstract class VoidExpansionBlocks {
                             .sound(SoundType.METAL)
             ),
             properties -> properties.component(VoidExpansion.VOID_IMMUNE, Unit.INSTANCE)
+    );
+    public static final Block ANTIGRAVITY_PROJECTOR = register(
+            "antigravity_projector",
+            new AntigravityProjectorBlock(
+                    BlockBehaviour.Properties.of() //TODO
+            )
+    );
+    public static final Block ANTIGRAVITY_BEAM = register(
+            "antigravity_beam",
+            new AntigravityBeamBlock(
+                    BlockBehaviour.Properties.of()
+                            .replaceable()
+                            .noCollission()
+                            .noLootTable()
+                            .pushReaction(PushReaction.DESTROY)
+                            .sound(SoundType.EMPTY)
+                            .noTerrainParticles()
+            ),
+            false
     );
 
     public static void initialize() {}

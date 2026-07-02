@@ -5,12 +5,19 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "EntityMixin",
-    "EntityMixin$ItemEntityMixin"
+    "EntityMixin$ExperienceOrbFrictionMixin",
+    "EntityMixin$FlyingMobFrictionMixin",
+    "EntityMixin$ItemEntityFrictionMixin",
+    "EntityMixin$ItemEntityMixin",
+    "EntityMixin$LivingEntityFrictionMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "overwrites": {
     "requireAnnotations": true
-	}
+  },
+  "mixinextras": {
+    "minVersion": "0.5.4"
+  }
 }

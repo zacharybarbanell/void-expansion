@@ -1,4 +1,4 @@
-accessWidener v2 named
+classTweaker v2 named
 
 accessible method net/minecraft/world/item/crafting/SingleItemRecipe$Serializer <init> (Lnet/minecraft/world/item/crafting/SingleItemRecipe$Factory;)V
 
@@ -12,3 +12,5 @@ accessible field net/minecraft/world/item/SmithingTemplateItem EMPTY_SLOT_CHESTP
 accessible field net/minecraft/world/item/SmithingTemplateItem EMPTY_SLOT_LEGGINGS Lnet/minecraft/resources/ResourceLocation;
 accessible field net/minecraft/world/item/SmithingTemplateItem EMPTY_SLOT_BOOTS Lnet/minecraft/resources/ResourceLocation;
 accessible field net/minecraft/world/item/SmithingTemplateItem EMPTY_SLOT_INGOT Lnet/minecraft/resources/ResourceLocation;
+
+extend-enum net/minecraft/world/level/material/FogType VOID_EXPANSION_ANTIGRAVITY_BEAM
